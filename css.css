@@ -1,0 +1,6 @@
+.bigText {
+    height:20px; /*altura da caixa de fração*/
+    width: 20px; /*largura da caixa de fração*/
+    font-size:12pt; /*tamanho da letra*/
+    text-align: center;
+}
