@@ -12,50 +12,107 @@
 
 
 
-<!--mathjax-->
+    <!--mathjax-->
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-<!--/mathjax-->
+    <!--/mathjax-->
 
     <title>MathJax para Frações</title>
 
 </head>
 
 <body>
-  <h1>CTesteomo escrever frações em páginas web</h1>
-  <h3>Escrevendo frações</h3>
-  <p>Podemos escrever uma equação, como apresentada abaixo:
-     $$\frac{3}{8}$$ ou podemos escreve-la na linha (inline) como essa fração  $\frac{3}{8}$</p>
+    <h1>Como escrever frações em páginas web</h1>
+    <h3>Escrevendo frações</h3>
+    <p>Existem duas formas de escrever a fração no texto, podemos escrever uma equação na linha como escrever dois terços: $\frac{3}{8}$. Ou podemos escrever a equação centralizada, como apresentada abaixo: $$\frac{3}{8}$$ e continuarmos escrevendo aqui
+        embaixo dela.</p>
+    <iframe width="100%" height="300" src="//jsfiddle.net/lyssascherer/g9coho2c/3/embedded/html,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    <p>Podemos ver no código a utilização de dois scripts no < head >. O primeiro permite escrever a fração in-line
+    e a segunda é a biblioteca do MathJax. Sendo assim, as duas são necessárias.</p>
+    <p>Para escrever a fração na linha (in-line) utilizamos a fração entre \$, e dentro colocamos o comando em latex, no caso
+     \$\frac{3}{8}\$. Caso queira escrever uma fórmula centralizada abaixo do texto utilizamos o texto entre \$\$, no caso \$\$\frac{3}{8}\$\$.</p>
+    <br>
+    <h3>Inserindo caixas de frações</h3>
+    <p>Como podemos imaginar o HTML não possui uma caixa de texto para frações pronta, mas isso não impede a construção de um como o apresentado abaixo.</p>
+    <br>
+    <label><p>Fração: </p></label>
+    <div style="margin: -60px 0px 0px 70px;">
+        <input type="text" maxlength="2"  onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left" />
+        <br>
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="25" y2="0" style="stroke:grey;stroke-width:3" />
+        </svg>
+        <br>
+        <input type="text" maxlength="2"  onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left" />
+    </div>
+    <p>Mas só uma caixa de texto para frações as vezes não é o suficiente. Precisamos muitas vezes ler a entrada do usuário, <br>
+      ou até mesmo escrever a entrada do usuário no texto, como abaixo:</p>
+      <br>
+    <label><p>Fração: </p></label>
+    <!-- Fração -->
+    <div style="margin: -60px 0px 0px 70px;">
+        <!-- Numerador -->
+        <input type="text" maxlength="2" id="numerador" onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left" />
+        <br>
+        <!-- linha da divisão -->
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="25" y2="0" style="stroke:grey;stroke-width:3" />
+        </svg>
+        <br>
+        <!-- Denominador -->
+        <input type="text" maxlength="2" id="denominador" onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left" />
+    </div>
+    <br>
+    <div id="formula"></div>
+    <br>
+    <div class="row text-center">
+        <button type="button" onclick="correct()">Exemplo</button>
+        <br>
+    </div>
 
-  <p>Uma dificuldade encontrada também é a inserção de um campo no qual o usuário poderia inserir o conteudo no sistema.<br>
-  Por esse motivo, descreverei como inserir as caixas.</p>
-  <label><p>Paradas que faltam:</p></label><br>
-                <label for="caminho_percorrido"><p>Como se lê? </p></label>
-                <input type="text" maxlength="50" class="smallText" name=" item" id="caminho_percorrido" align="left" />
-                <br><br><br><br>
-                <label><p>Como é a fração?</p></label>
-                <!-- Fração -->
-                <div style="margin: -75px 0px 0px 160px;">
-                    <!-- Numerador -->
-                    <input type="text" maxlength="2" id="caminho_percorrido_num" onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left"/>
-                    <br>
-                    <!-- linha da divisão -->
-                    <svg height="5" width="50">
-                        <line x1="0" y1="0" x2="25" y2="0" style="stroke:grey;stroke-width:3" />
-                      </svg>
-                    <br>
-                    <!-- Denominador -->
-                    <input type="text" maxlength="2" id="caminho_percorrido_den" onKeyPress="validate(event)" onPaste="validatepaste(event)" class="bigText" name=" item" align="left" />
-                </div>
 
-                <div id="formula"></div>
-                <div class="row text-center">
-                    <a class="btn btn-info btn-lg" onclick="correct()" role="button">OK!</a>
-                    <button type="button" onclick="correct()" >Exemplo</button>
-                    <br>
-                </div>
+    <p>Você pode ver o código aqui:</p>
+    <script async src="//jsfiddle.net/lyssascherer/taov05do/2/embed/html,js,css,result/dark/"></script>
+    <p><b>Numerador e denominador:</b> Como podemos ver tanto o numerador quanto o denominador utilizam a função validate(event).
+    Essa função serve para validar o caractere inserido, só permitindo escrever números. O campo "maxlenght" limita
+    a quantidade de digitos do número, no caso permitimos apenas 2. A classe "bigText" serve para definir o tamanho do
+    campo onde será inserida a fração. Todos esses dados podem ser editados. Experimente alterar o códio clicando em
+    "Edit in JSFiddle" no canto superior esquerdo do quadro dos códigos. Altere o número de digitos no HTML, ou o tamanho do
+    campo da fração no CSS.</p>
+
+    <p><b>Botão Exemplo:</b>Ao clicar o botão "Exemplo" executamos o a função "correct()". Essa função recebe o numerador e
+      o denominador e os formata para inserirmos em na div que tem a "id="formula"".  </p>
+
+
+
+
+
+
+    <p id="example1-description">
+        This is the descriptive text before the code example:
+    </p>
+    <figure>
+        <figcaption id="example1-caption">
+            This is the caption
+        </figcaption>
+        <pre aria-labelledby="example1-caption" aria-describedby="example1-description"><code>function getToSleep()
+{
+  while(noise &lt;= 10 &amp;&amp; sleep !== "zzz")
+  {
+    sheep ++;
+  }
+  if(noise &gt; 10)
+  {
+    return false;
+  }
+  return true;
+}</code></pre>
+    </figure>
+
+
+    <script async src="//jsfiddle.net/techappetite/Zbvgw/embed/"></script>
 
 
 

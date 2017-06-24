@@ -13,16 +13,13 @@ function validatepaste(e) {
 }
 
 function validate(e) {
-    //getting key code of pressed key
+    //Recebe a tecla pressionada
     var keycode = (e.which) ? e.which : e.keyCode;
-    var phn = document.getElementById('textarea');
-    //comparing pressed keycodes
+    //compara a tecla clicada, se entrar entrar no if é porque não é
+    //um numero, então não escreve a letra.
     if ((keycode < 48 || keycode > 57) && keycode !== 13) {
         e.preventDefault();
-        console.log("FAIL");
         return false;
-    } else {
-        console.log("OK!");
     }
 }
 function correct(){
@@ -30,11 +27,18 @@ function correct(){
     formula: document.getElementById("formula"),
 
     update: function () {
-      var a = document.getElementById("caminho_percorrido_num").value;
-          b = document.getElementById("caminho_percorrido_den").value;
-      var c = document.getElementById("caminho_percorrido").value;
-      var tex = "\\text{"+c+" }\\   \\frac{"+a+"}{"+b+"}";
-      this.formula.innerHTML = "\\["+tex+"\\]";
+      //Recebe os elementos com a id numerador em a e id denominador em b
+      var a = document.getElementById("numerador").value;
+          b = document.getElementById("denominador").value;
+      if(a=='' || b==''){
+        //Se algum dos campos estiver vazio solicita que preencha
+        this.formula.innerHTML = "Valor inválido, preencha os campos que faltam!";
+      }
+      else{
+        //se não ele formata a fração utilizando o latex do MathJax, comando \frac{a}{b}
+        var tex = "\\frac{"+a+"}{"+b+"}";
+        this.formula.innerHTML = "Resultado inline: \$"+tex+"\$ <br>Resultado Centralizado: \\["+tex+"\\]";
+      }
       MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
     }
   };
