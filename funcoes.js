@@ -1,3 +1,5 @@
+
+//Valida se entrada com paste no campo é letra
 function validatepaste(e) {
     //var ctrldown =  e.ctrlKey ? e.ctrlKey : ((e.keyCode === 17) ? true : false);
     var pastedata = e.clipboardData.getData('text/plain');
@@ -12,6 +14,7 @@ function validatepaste(e) {
     }
 }
 
+//Valida se entrada do campo é letra
 function validate(e) {
     //Recebe a tecla pressionada
     var keycode = (e.which) ? e.which : e.keyCode;
@@ -22,6 +25,8 @@ function validate(e) {
         return false;
     }
 }
+
+//Função que ocorre ao pressionar o botão "Exemplo"
 function correct(){
   var DynamicMJ = {
     formula: document.getElementById("formula"),
